@@ -1,0 +1,11 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.touchArea {
+  width: 500px;
+  height: 500px;
+  background-color: aquamarine;
+  opacity: 0.5;
+}

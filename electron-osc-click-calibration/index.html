@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+</head>
+<body>
+
+<div id="root"></div>
+
+</body>
+<script>
+  // [Resolving in node_modules · Issue #9 · webpack/coffee-loader](https://github.com/webpack/coffee-loader/issues/9)
+  // [Cannot resolve module 'fs' · Issue #8 · webpack/jade-loader](https://github.com/webpack/jade-loader/issues/8)
+  // [Webpack issue with node libraries · Issue #29 · kriasoft/react-starter-kit](https://github.com/kriasoft/react-starter-kit/issues/29)
+  // webpack を経由すると browserify されるので、nodeのコアモジュールにアクセスできない
+  // よって、webpack を経由しない html に直がきしている
+  window.osc = require('oscsocket');
+</script>
+<script src="./dist/App.js"></script>
+</html>
