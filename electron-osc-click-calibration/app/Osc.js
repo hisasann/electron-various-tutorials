@@ -12,6 +12,9 @@ const sock = new osc.OSCSocket();
 class OscSender extends Component {
   constructor(props) {
     super(props);
+
+    this.click = this.click.bind(this);
+    this.touchStart = this.touchStart.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +32,23 @@ class OscSender extends Component {
     });
   }
 
+  sendOSC(x, y) {
+    let msg = new osc.OSCMessage();
+    msg.address = '/osc/from/electron';
+    msg.addArgument('f', x / window.innerWidth);
+    msg.addArgument('f', y / window.innerHeight);
+    sock.send(msg, 6666, '127.0.0.1');
+
+    //sock.send(new osc.OSCMessage('/osc/from/electron ,is 100 TextValue'), 6666);
+  }
+
+  click(event) {
+    console.log('click----------------------------');
+    console.log(event.pageX, event.pageY);
+
+    this.sendOSC(event.pageX, event.pageY);
+  }
+
   touchStart(event) {
     event.preventDefault();
 
@@ -42,21 +62,38 @@ class OscSender extends Component {
 
     console.log(event.pageX, event.pageY);
 
-    let msg = new osc.OSCMessage();
-    msg.address = '/osc/from/electron';
-    msg.addArgument('f', event.pageX / 500);
-    msg.addArgument('f', event.pageY / 500);
-    sock.send(msg, 6666, '127.0.0.1');
+    this.sendOSC(event.pageX, event.pageY);
+  }
 
-    //sock.send(new osc.OSCMessage('/osc/from/electron ,is 100 TextValue'), 6666);
+  touchMove(event) {
+    event.preventDefault();
+
+    //console.log('touchMove');
+    //// touch しているすべての座標が取れる
+    //console.log('touches:', event.touches);
+    //// touch しているすべての座標が取れる（DOM上）
+    //console.log('targetTouches: ', event.targetTouches);
+    //// touchmove した指だけの情報
+    //console.log('changedTouches: ', event.changedTouches);
+  }
+
+  touchEnd(event) {
+    event.preventDefault();
+
+    console.log('touchEnd----------------------------');
+    // touch しているすべての座標が取れる
+    console.log('touches:', event.touches);
+    // touch しているすべての座標が取れる（DOM上）
+    console.log('targetTouches: ', event.targetTouches);
+    // touchend した指だけの情報
+    console.log('changedTouches: ', event.changedTouches);
   }
 
   render() {
     return (
       <div>
-        <div
-          onClick={this.touchStart}
-          className={styles.touchArea}></div>
+        <div onClick={this.click} onTouchStart={this.touchStart} onTouchMove={this.touchMove} onTouchEnd={this.touchEnd} className={styles.touchArea}>
+        </div>
       </div>
     );
   }

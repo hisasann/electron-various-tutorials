@@ -22,15 +22,16 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   var Screen = require('screen');
   var size = Screen.getPrimaryDisplay().size; // ディスプレイのサイズを取得する
+  console.log('size: ', size.width, size.height);
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
     left: 0,
     top: 0,
-    //width: size.width,   // 最大サイズで表示する
-    //height: size.height, // 最大サイズで表示する
-    width: '500px',
-    height: '500px',
+    width: size.width,   // 最大サイズで表示する
+    height: size.height, // 最大サイズで表示する
+    //width: 700,
+    //height: 700,
     transparent: true,    // 背景を透明に
     show: true,
     //frame: false,
@@ -38,7 +39,7 @@ app.on('ready', function() {
     //'always-on-top': true // 一番手前に表示する
   });
 
-  mainWindow.maximize();
+  //mainWindow.maximize();
 
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/index.html');
