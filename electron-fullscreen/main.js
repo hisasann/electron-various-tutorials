@@ -33,6 +33,7 @@ app.on('ready', function() {
     height: size.height, // 最大サイズで表示する
     //fullscreen: true,   // Mac だとこれで fullscreen になる
 
+    // transparent を true にすると、 resizable が動かなくなる
     transparent: true,    // 背景を透明にする
     show: true,
     frame: false,
