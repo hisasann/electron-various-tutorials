@@ -60,9 +60,11 @@ class OscSender extends Component {
     // touchstart した指だけの情報
     console.log('changedTouches: ', event.changedTouches);
 
-    console.log(event.pageX, event.pageY);
-
-    this.sendOSC(event.pageX, event.pageY);
+    for (let i = 0; i < event.changedTouches.length; i++) {
+      let obj = event.changedTouches[i];
+      console.log(obj.pageX, obj.pageY);
+      this.sendOSC(obj.pageX, obj.pageY);
+    }
   }
 
   touchMove(event) {

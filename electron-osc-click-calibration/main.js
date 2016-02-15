@@ -34,7 +34,7 @@ app.on('ready', function() {
     //height: 700,
     transparent: true,    // 背景を透明に
     show: true,
-    //frame: false,
+    frame: false,
     //resizable: false,
     //'always-on-top': true // 一番手前に表示する
   });
