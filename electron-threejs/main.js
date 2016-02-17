@@ -43,11 +43,15 @@ app.on('ready', function() {
   // maximize は挙動がよくわからないので現時点では使わない
   //mainWindow.maximize();
 
-  // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
+  // loadURL は遅延で実行しても問題ない
+  // 何か他からの処理分待ってから、実行するならここでよいかもしれない
+  setTimeout(function() {
+    // and load the index.html of the app.
+    mainWindow.loadURL('file://' + __dirname + '/index.html');
 
-  // Open the DevTools.
-  mainWindow.openDevTools();
+    // Open the DevTools.
+    mainWindow.openDevTools();
+  }, 10000);
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
