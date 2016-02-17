@@ -164,8 +164,8 @@ $RECYCLE.BIN/
 .rvmrc
 vendor/
 
-# eclipse 用のファイル
+# eclipse 逕ｨ縺ｮ繝輔ぃ繧､繝ｫ
 .project
 
 bower_components/
-dist/
+dist/*.js
