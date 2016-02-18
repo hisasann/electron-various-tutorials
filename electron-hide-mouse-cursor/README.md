@@ -22,6 +22,10 @@ body::selection { background: transparent; }
 body::-moz-selection { background: transparent; }
 ```
 
-Mac では mouse cursor を動かさないと消えてくれない
+**Mac** では mouse cursor を動かさないと消えてくれない
 
 この場合は、 AppleScript とかで enter を押すなどしないとうまく消えない
+
+**Windows** では何もしなくても mouse cursor が消えてくれた
+
+とりあえずはこれで対応できそうだ
