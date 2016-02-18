@@ -4,7 +4,6 @@
 
 ### サンプルコード
 
-
 ```css
 body {
   overflow: hidden;
