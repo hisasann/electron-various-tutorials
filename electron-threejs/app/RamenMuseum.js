@@ -6,6 +6,7 @@ class RamenMuseum {
 
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer();
+    //this.renderer = new THREE.CanvasRenderer();
     this.wrapper = document.querySelector(wrapperSelector);
     this.wrapper.appendChild(this.renderer.domElement);
     this.renderer.setSize(this.wrapper.clientWidth, this.wrapper.clientHeight);
