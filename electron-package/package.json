@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "electron": "electron ./",
     "start": "webpack --watch",
-    "package-mac": "electron-packager . --out=release --platform=darwin --arch=x64",
-    "package-win": "electron-packager . --out=release --platform=win32 --arch=x64"
+    "package": "node package.js",
+    "package-mac": "electron-packager . Document --out=release --platform=darwin --arch=x64 --asar",
+    "package-win": "electron-packager . Document --out=release --platform=win32 --arch=x64 --asar"
   },
   "author": "",
   "license": "ISC",
@@ -18,9 +19,11 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "css-loader": "^0.23.1",
+    "del": "^2.2.0",
     "electron-packager": "^5.2.1",
     "electron-prebuilt": "^0.36.2",
     "file-loader": "^0.8.5",
+    "minimist": "^1.2.0",
     "react-hot-loader": "^1.3.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.11"
