@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "electron": "electron ./",
     "start": "webpack --watch",
+    "package": "node package.js",
     "package-mac": "electron-packager . --out=release --platform=darwin --arch=x64",
     "package-win": "electron-packager . --out=release --platform=win32 --arch=x64"
   },
