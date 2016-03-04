@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Document</title>
+</head>
+<body>
+<div id="root"></div>
+</body>
+<script>
+  var SerialPort = require('serialport').SerialPort;
+  window.serialPort = new SerialPort('COM4', {
+    baudrate: 57600
+  });
+</script>
+<script src="./dist/App.js"></script>
+</html>
