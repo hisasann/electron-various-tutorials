@@ -1,0 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-image: url("./dist/background.jpg");
+  background-size: cover;
+}
