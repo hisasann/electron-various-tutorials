@@ -32,3 +32,17 @@ res.end('"/></body></html>');
 基本、このどちらかのパターンになると思う。
 
 electron なので、そのままファイルをリクエストして作成し、 **base64** で返すパターンを作ってみた。
+
+## app.getPath('userData') の値
+
+### Windows
+
+```
+C:\Users\【ユーザー名】\AppData\Roaming\【パッケージ名】
+```
+
+### Mac
+
+```
+/Users/【ユーザー名】/Library/Application Support/electron-image-cache
+```

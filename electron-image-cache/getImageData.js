@@ -4,14 +4,23 @@ const mkdirp = require('mkdirp');
 
 // http://stackoverflow.com/questions/9540978/nodejs-how-to-read-and-output-jpg-image
 
-const getImageData = function(arg, cachePath) {
-  this.imageUrl = arg;
-  this.path = cachePath;
-  this.imagePath = '/images';
-  // http://qiita.com/gorton@github/items/ded2d128ded9c9f732e8
-  this.filename = this.imageUrl.match('.+/(.+?)([\?#;].*)?$')[1];
+// http://stackoverflow.com/questions/169008/regex-for-parsing-directory-and-filename
+const pathExpr = new RegExp('^(.+?)://(.+?):?(\d+)?(/.+)?/([^/]+)([\?#;].*)?$$');
 
-  this.absolutePath = [this.path, this.imagePath, '/', this.filename].join('');
+var options = {
+  isBase64: false
+};
+
+const getImageData = function(arg, cachePath, imagePath) {
+  this.imageUrl = arg;
+  this.cachePath = cachePath;
+
+  const parseExpr = this.imageUrl.match(pathExpr);
+
+  this.imagePath = imagePath + parseExpr[4];
+  this.filename = parseExpr[5];
+
+  this.absolutePath = [this.cachePath, this.imagePath, '/', this.filename].join('');
 
   var readPromise = this.accessImage();
   var self = this;
@@ -58,13 +67,19 @@ getImageData.prototype.accessImage = function() {
 getImageData.prototype.readImage = function() {
   var self = this;
   return new Promise(function(resolve, reject) {
+    // return file path
+    if (!options.isBase64) {
+      resolve(self.absolutePath);
+      return;
+    }
+
+    // return base64 string
     fs.readFile(self.absolutePath, (err, data) => {
       if (err) {
         reject();
         return;
       }
 
-      console.log(data);
       resolve('data:image/jpeg;base64,' + new Buffer(data).toString('base64'));
     });
   });
@@ -77,16 +92,16 @@ getImageData.prototype.requestImage = function() {
       {method: 'GET', url: self.imageUrl, encoding: null}, (error, response, body) => {
         if (!error && response.statusCode === 200) {
           // make images directory
-          mkdirp(self.path + self.imagePath, function (err) {
+          mkdirp(self.cachePath + self.imagePath, function (err) {
             if (err) {
               console.error(err)
             }
-          });
 
-          // save image
-          var writePromise = self.writeImage(body);
-          writePromise.then(function () {
-            resolve();
+            // save image
+            var writePromise = self.writeImage(body);
+            writePromise.then(function () {
+              resolve();
+            });
           });
         }
       }

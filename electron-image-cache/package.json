@@ -30,9 +30,11 @@
     "webpack": "^1.12.11"
   },
   "dependencies": {
+    "lodash": "^4.6.1",
     "mkdirp": "^0.5.1",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
-    "request": "^2.69.0"
+    "request": "^2.69.0",
+    "rimraf": "^2.5.2"
   }
 }

@@ -8,6 +8,9 @@ require('crash-reporter').start();
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
 
+const fs = require('fs');
+const rmdir = require('rimraf');
+
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
   // On OS X it is common for applications and their menu bar
@@ -33,7 +36,7 @@ app.on('ready', function() {
     //width: 700,
     //height: 700,
     transparent: true,    // 背景を透明に
-    show: true,
+    show: false,
     frame: false,
     //resizable: false,
     //'always-on-top': true // 一番手前に表示する
@@ -55,17 +58,20 @@ app.on('ready', function() {
     mainWindow = null;
   });
 
+  // delete images
+  const deletePath = app.getPath('userData') + '/images';
+  rmdir(deletePath, () => {
+    mainWindow.show();
+  });
+
   const ipcMain = require('electron').ipcMain;
   const getImageData = require('./getImageData');
 
   // In main process.
-  ipcMain.on('asynchronous-message', function(event, arg) {
-    console.log(arg);
-    console.log(app.getPath('userData'));
-
-    var imagePromise = new getImageData(arg, app.getPath('userData'));
+  ipcMain.on('asynchronous-message', function(event, returnEvent, imagePath) {
+    var imagePromise = new getImageData(imagePath, app.getPath('userData'), '/images');
     imagePromise.then(function (data) {
-      event.sender.send('asynchronous-reply', data);
+      event.sender.send(returnEvent, data);
     });
   });
 });
