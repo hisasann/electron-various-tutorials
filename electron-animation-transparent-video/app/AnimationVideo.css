@@ -1,0 +1,8 @@
+.video {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 500px;
+  height: 500px;
+  z-index: 1001;
+}

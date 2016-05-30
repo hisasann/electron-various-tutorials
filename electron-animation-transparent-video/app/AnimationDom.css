@@ -1,0 +1,8 @@
+.dom {
+  position: absolute;
+  top: 300px;
+  left: 150px;
+  width: 200px;
+  height: 200px;
+  z-index: 1002;
+}
