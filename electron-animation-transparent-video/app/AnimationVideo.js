@@ -19,7 +19,7 @@ export default class AnimationVideo extends Component {
     console.log('--AnimationVideo componentDidMount');
     this.element = ReactDOM.findDOMNode(this.refs.video);
 
-    this._render();
+    // this._render();
   }
 
   componentWillUnmount() {

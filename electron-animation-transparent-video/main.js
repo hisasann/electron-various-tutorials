@@ -1,8 +1,10 @@
-var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+const electron = require('electron');
+const app = electron.app;  // Module to control application life.
+const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
+const crashReporter = electron.crashReporter;  // Module to create native browser window.
 
 // Report crashes to our server.
-require('crash-reporter').start();
+// crashReporter.start();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -20,8 +22,8 @@ app.on('window-all-closed', function() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
-  var Screen = require('screen');
-  var size = Screen.getPrimaryDisplay().size; // ディスプレイのサイズを取得する
+  const screen = electron.screen;
+  var size = screen.getPrimaryDisplay().size; // ディスプレイのサイズを取得する
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
