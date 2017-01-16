@@ -1,0 +1,13 @@
+{
+  "name": "electron-auto-update",
+  "version": "1.0.0",
+  "description": "electron-auto-update",
+  "main": "main.js",
+  "author": "hisasann <hisasann25@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "electron-auto-updater": "^0.10.1",
+    "electron-log": "^1.3.0"
+  }
+}
