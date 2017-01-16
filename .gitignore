@@ -192,4 +192,6 @@ data/
 **/node_modules
 **/dist/*.js
 **/release
+**/releases
 **/npm-debug.log
+/electron-auto-update-server/cert/*.pem
